@@ -19,7 +19,8 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.8.0",
-    "eslint": "9.x",
+    "@types/node": "^22.0.0",
+    "eslint": "^8.56.0",
     "globals": "^15.8.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
@@ -27,7 +28,10 @@
   },
   "packageManager": "yarn@4.3.1",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
     "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3"
   }

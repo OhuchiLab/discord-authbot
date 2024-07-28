@@ -1,0 +1,9 @@
+node_modules/
+out/
+
+.eslintrc.json
+eslint.config.js
+package-lock.json
+yarn.lock
+.env
+.prettierrc

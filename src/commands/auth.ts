@@ -32,6 +32,8 @@ async function authCommandHandler(interaction: CommandInteraction) {
     return;
   }
 
+  await interaction.deferReply(); // コマンドの処理中にスピナーを表示
+
   // FireStoreからメンバー情報を取得
   const member = await getMemberByDiscordId(interaction.user.id);
   if (!member) {
@@ -43,19 +45,26 @@ async function authCommandHandler(interaction: CommandInteraction) {
   const user: UserRecord = await adminAuth.getUserByEmail(member.mail);
   if (user.emailVerified) {
     try {
-      await interaction.reply("メール認証が完了しています");
-      await giveRoles(interaction);
+      await changeNickName(interaction, member);
+      await giveRoles(interaction, member.mail);
     } catch (error) {
-      console.error("Failed to verify email");
-      await interaction.reply("認証に失敗しました");
+      console.error("Failed to verify email", error);
+      await interaction.editReply("認証に失敗しました");
     }
   } else {
-    await interaction.reply("メール認証が完了していません");
+    await interaction.editReply("メール認証が完了していません");
   }
 }
 
-async function giveRoles(interaction: CommandInteraction) {
-  const user = await adminAuth.getUserByEmail(interaction.user.tag);
+async function changeNickName(interaction: CommandInteraction, member: Member) {
+  const guild: Guild = interaction.guild!;
+  const guildMember: GuildMember = await guild.members.fetch(interaction.user.id);
+  const realName: string = member.name;
+  await guildMember.setNickname(realName);
+}
+
+async function giveRoles(interaction: CommandInteraction, memberMail: string) {
+  const user = await adminAuth.getUserByEmail(memberMail);
   const guild: Guild = interaction.guild!;
   const guildMember: GuildMember = await guild.members.fetch(interaction.user.id);
 
@@ -71,9 +80,9 @@ async function giveAuthorizedRole(interaction: CommandInteraction, guild: Guild,
     await guildMember.roles.add(authorizedRole);
     await guildMember.roles.remove(unAuthorizedRole);
 
-    await interaction.reply("認証しました!");
+    await interaction.editReply("認証しました!");
   } catch (error) {
-    console.error("Failed to give Authorized Role");
+    console.error("Failed to give Authorized Role: ", error);
   }
 }
 

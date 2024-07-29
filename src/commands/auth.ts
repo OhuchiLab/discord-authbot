@@ -8,7 +8,14 @@ import addRoleToMember from "../utils/addRoleToMember";
 import Grade from "../entities/grade";
 
 // ロールのimport
-import { b4Role, m1Role, m2Role, d1Role, d2Role, d3Role, teacherRole, obogRole } from "../roles/grade";
+import b4Role from "../roles/grades/b4";
+import m1Role from "../roles/grades/m1";
+import m2Role from "../roles/grades/m2";
+import d1Role from "../roles/grades/d1";
+import d2Role from "../roles/grades/d2";
+import d3Role from "../roles/grades/d3";
+import teacherRole from "../roles/grades/teacher";
+import obogRole from "../roles/grades/obog";
 import authorizedRoleProperty from "../roles/authorized";
 import unAuthorizedRoleProperty from "../roles/unAuthorized";
 import Member from "../entities/member";
@@ -109,3 +116,5 @@ async function giveGradeRole(interaction: CommandInteraction, userAccount: UserR
       break;
   }
 }
+
+export default authCommand;

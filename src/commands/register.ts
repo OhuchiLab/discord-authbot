@@ -71,3 +71,5 @@ function validateStudentNumber(studentNumber: string): boolean {
   // とりあえず8桁の数字であることを確認
   return studentNumber.length === 8;
 }
+
+export default registerCommand;

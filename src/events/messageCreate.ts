@@ -110,7 +110,7 @@ async function validateAndRegisterUser(
       );
     } else {
       userInfo = clearAuthData();
-      await reply("認証に失敗しました。もう一度やり直してください");
+      await reply("ユーザ情報が一致しませんでした。もう一度やり直してください");
       await reply("名前(フルネーム)を教えてください");
     }
     userStates.delete(userId); // ユーザー情報を削除

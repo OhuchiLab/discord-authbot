@@ -14,6 +14,7 @@ async function sendAuthMail(mail: string, student_number: string, grade: string)
     console.log("Send mail to " + mail + " successfully");
   } catch (e) {
     console.error(e);
+    throw e;
   }
 }
 

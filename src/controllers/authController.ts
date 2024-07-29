@@ -17,6 +17,7 @@ async function sendAuthMailController(userInfo: AuthData) {
     await setDiscordId(member!.id!, userInfo.discordId!);
   } catch (error) {
     console.error("Error sending auth mail:", error);
+    throw error;
   }
 }
 

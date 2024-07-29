@@ -2,8 +2,8 @@
 import dotenv from "dotenv";
 import { CustomClient } from "./types/customClient";
 import { loadCommands } from "./loadCommands";
-import { setupEventHandlers } from "./events/setupEventHandlers";
-import { AuthData } from "./types/authData";
+import { setupEventHandlers } from "./events/eventHandler";
+import AuthData from "./types/authData";
 
 // .envファイルの読み込み
 dotenv.config();

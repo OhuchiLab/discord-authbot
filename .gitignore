@@ -130,3 +130,6 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# クレデンシャル
+ohuchilab-discord-firebase-adminsdk-o871u-550d018435.json

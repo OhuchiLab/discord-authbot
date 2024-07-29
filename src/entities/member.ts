@@ -5,7 +5,7 @@ interface Member {
   name: string;
   student_number: string;
   grade: Grade;
-  email: string;
+  mail: string;
   discordId: string;
 }
 

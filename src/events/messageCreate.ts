@@ -1,7 +1,10 @@
 import { ChannelType, Events, Message } from "discord.js";
 import { CustomClient } from "../types/customClient";
+import authMember from "../utils/authMember";
+import sendAuthMailController from "../controllers/authController";
 import AuthData from "../types/authData";
 import Grade from "../entities/grade";
+import clearAuthData from "../utils/clearAuthData";
 
 export function setupMessageCreate(client: CustomClient, userStates: Map<string, AuthData>) {
   client.on(Events.MessageCreate, async (message: Message) => {
@@ -19,6 +22,10 @@ async function handleDirectMessage(message: Message, userStates: Map<string, Aut
     await setUserInfoAndReply(userStates, userId, { name: message.content }, "学籍番号を教えてください", reply);
   } else if (!userInfo.student_number) {
     await validateAndSetStudentNumber(message, userInfo, userStates, userId, reply);
+  } else if (!userInfo.grade) {
+    await validateAndSetGrade(message, userInfo, userStates, userId, reply);
+  } else if (!userInfo.mail) {
+    await validateAndRegisterUser(message, userInfo, userStates, userId, reply);
   }
 }
 
@@ -79,20 +86,35 @@ async function validateAndSetGrade(
 }
 
 async function validateAndRegisterUser(
-    message: Message,
-    userInfo: AuthData,
-    userStates: Map<string, AuthData>,
-    userId: string,
-    reply: (text: string) => Promise<Message>
+  message: Message,
+  userInfo: AuthData,
+  userStates: Map<string, AuthData>,
+  userId: string,
+  reply: (text: string) => Promise<Message>
 ) {
-    const mail = message.content;
-    if (mail.endsWith("@shizuoka.ac.jp")) {
-        userInfo.mail = mail;
-        if (await authMember(userInfo)) {
-            try {
-                userInfo.discordId = message.author.id;
-                await sendAuthMailController(userInfo);
-            }
-        }
+  const mail = message.content;
+  if (mail.endsWith("@shizuoka.ac.jp")) {
+    userInfo.mail = mail;
+    if (await authMember(userInfo)) {
+      try {
+        userInfo.discordId = message.author.id;
+        await sendAuthMailController(userInfo);
+      } catch (error) {
+        userInfo = clearAuthData();
+        await reply("認証に失敗しました。もう一度やり直してください");
+        await reply("名前(フルネーム)を教えてください");
+        return;
+      }
+      await reply(
+        "認証メールを送信しました。静大メールから認証を行い、Discordサーバーで`/auth`コマンドを実行してください"
+      );
+    } else {
+      userInfo = clearAuthData();
+      await reply("認証に失敗しました。もう一度やり直してください");
+      await reply("名前(フルネーム)を教えてください");
     }
+    userStates.delete(userId); // ユーザー情報を削除
+  } else {
+    await reply("メールアドレスの形式が正しくありません。もう一度入力してください");
+  }
 }

@@ -1,7 +1,7 @@
 import { Events, Guild, GuildMember, Role } from "discord.js";
-import { CustomClient } from "./src/types/customClient";
-import createRoleIfNotFound from "./src/utils/createRoleNotFound";
-import unAuthorizedRoleProperty from "./src/roles/unAuthorized";
+import { CustomClient } from "../types/customClient";
+import createRoleIfNotFound from "../utils/createRoleNotFound";
+import unAuthorizedRoleProperty from "../roles/unAuthorized";
 
 export function setupGuildMemberAddHandler(client: CustomClient) {
   client.on(Events.GuildMemberAdd, async (member: GuildMember) => {

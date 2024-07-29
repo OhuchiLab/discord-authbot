@@ -9,7 +9,7 @@ async function insertUserData(member: Member): Promise<void> {
     name: member.name,
     student_number: member.student_number,
     grade: member.grade,
-    email: member.email,
+    mail: member.mail,
   });
   console.log("Document written with ID: ", docRef.id);
 }

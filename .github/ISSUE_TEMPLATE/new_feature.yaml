@@ -1,0 +1,30 @@
+name: 機能追加用フォーム
+description: 追加すべき機能を記入するためのフォームです。
+title: "FEAT: "
+labels: [Type: Enhancement]
+
+body:
+  - type: checkboxes
+    id: type_of_feature
+    attributes:
+      label: 機能の種類
+      description: どのような機能を追加するか選択してください。
+      options:
+        - label: 新しい機能
+        - label: 機能改善
+    variations:
+      required: true
+  - type: input
+    id: feature_description
+    attributes:
+      label: 機能の詳細
+      description: 追加する機能の概要を記入してください。
+      placeholder: 例）ユーザーがログインできるようにする
+    varidations:
+      required: true
+  - type: textarea
+    id: other_comments
+    attributes:
+      label: その他コメント
+      description: その他コメントがあれば記入してください。
+      placeholder: 例）この機能が追加されることでどのようなメリットがあるかを記入してください。

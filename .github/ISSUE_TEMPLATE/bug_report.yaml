@@ -1,7 +1,7 @@
 name: バグ報告用フォーム
 description: 実行中に発生したバグを報告するためのフォームです。
 title: "BUG: "
-label: [Type:\ Bug]
+labels: [Type:\ Bug]
 
 body: 
   - type: checkboxes

@@ -1,7 +1,8 @@
 name: バグ報告用フォーム
 description: 実行中に発生したバグを報告するためのフォームです。
 title: "BUG: "
-label: [Type: Bug]
+label: 
+  - Type: Bug
 
 body: 
   - type: checkboxes
@@ -12,7 +13,7 @@ body:
         - label: バグを再現できた(どういう状況で発生したか理解している)
         - label: バグを再現できなかった(どういう状況で発生したか理解できない)
         - label: バグを再現できたが、原因がわからない
-  -type: textarea
+  - type: textarea
     id: description
     attributes:
       label: バグの症状
@@ -26,8 +27,8 @@ body:
       label: エラーログ
       description: エラーログがあればそのまま貼り付けてください。
       placeholder: 例）「[ERROR] 2021-01-01 12:00:00 xxxxx」
-    validations:
-      required: true
+      validations:
+        required: true
   - type: textarea
     id: branch
     attributes:

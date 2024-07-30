@@ -1,0 +1,38 @@
+name: バグ報告用フォーム
+description: 実行中に発生したバグを報告するためのフォームです。
+title: "BUG: "
+label: [Type: Bug]
+
+body: 
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: バグの確認状況
+      options:
+        - label: バグを再現できた(どういう状況で発生したか理解している)
+        - label: バグを再現できなかった(どういう状況で発生したか理解できない)
+        - label: バグを再現できたが、原因がわからない
+  -type: textarea
+    id: description
+    attributes:
+      label: バグの症状
+      description: どういったバグが発生したか、詳細に入力してください。
+      placeholder: 例）「authコマンドを実行すると、xxxというエラーログが出て応答を停止する。」
+      validations:
+        required: true
+  - type: textarea
+    id: error_log
+    attributes:
+      label: エラーログ
+      description: エラーログがあればそのまま貼り付けてください。
+      placeholder: 例）「[ERROR] 2021-01-01 12:00:00 xxxxx」
+    validations:
+      required: true
+  - type: textarea
+    id: branch
+    attributes:
+      label: バグが発生したブランチ
+      description: バグが発生したブランチ名を入力してください。
+      placeholder: 例）「develop」
+      validations:
+        required: true

@@ -21,21 +21,19 @@ body:
       label: バグの症状
       description: どういったバグが発生したか、詳細に入力してください。
       placeholder: 例）「authコマンドを実行すると、xxxというエラーログが出て応答を停止する。」
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     id: error_log
     attributes:
       label: エラーログ
       description: エラーログがあればそのまま貼り付けてください。
       placeholder: 例）「[ERROR] 2021-01-01 12:00:00 xxxxx」
-    validations:
-      required: true
   - type: textarea
     id: branch
     attributes:
       label: バグが発生したブランチ
       description: バグが発生したブランチ名を入力してください。
       placeholder: 例）「develop」
-      validations:
-        required: true
+    validations:
+      required: true

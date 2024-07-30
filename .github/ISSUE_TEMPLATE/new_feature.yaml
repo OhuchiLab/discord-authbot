@@ -12,7 +12,7 @@ body:
       options:
         - label: 新しい機能
         - label: 機能改善
-    variations:
+    validations:
       required: true
   - type: input
     id: feature_description
@@ -20,7 +20,7 @@ body:
       label: 機能の詳細
       description: 追加する機能の概要を記入してください。
       placeholder: 例）ユーザーがログインできるようにする
-    varidations:
+    validations:
       required: true
   - type: textarea
     id: other_comments

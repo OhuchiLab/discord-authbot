@@ -19,7 +19,13 @@ async function handleDirectMessage(message: Message, userStates: Map<string, Aut
   const reply = async (text: string) => message.reply(text);
 
   if (!userInfo.name) {
-    await setUserInfoAndReply(userStates, userId, { name: message.content }, "学籍番号を教えてください", reply);
+    await setUserInfoAndReply(
+      userStates,
+      userId,
+      { name: message.content },
+      "学籍番号を教えてください(OB/OGまたは教職員の場合は00000000)",
+      reply
+    );
   } else if (!userInfo.student_number) {
     await validateAndSetStudentNumber(message, userInfo, userStates, userId, reply);
   } else if (!userInfo.grade) {
@@ -59,7 +65,7 @@ async function validateAndSetStudentNumber(
     userStates,
     userId,
     { student_number: studentNumber },
-    "学年を以下から教えてください: B4, M1, M2, D1, D2, D3, OB/OG",
+    "学年または分類を以下から教えてください: B4, M1, M2, D1, D2, D3, OB/OG, TEACHER",
     reply
   );
 }
@@ -81,7 +87,9 @@ async function validateAndSetGrade(
       reply
     );
   } else {
-    await reply("学年の形式が正しくありません。学年を以下から教えてください: B4, M1, M2, D1, D2, D3, OB/OG");
+    await reply(
+      "学年または分類の形式が正しくありません。学年または分類を以下から教えてください: B4, M1, M2, D1, D2, D3, OB/OG, TEACHER"
+    );
   }
 }
 
